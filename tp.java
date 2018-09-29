@@ -85,6 +85,7 @@ public class tabuleiro{
 }
 
 public class sorteios{
+	private int vec[] = new int[9];
 	public sort_first_coord(){
 		/*rand de 1 a 8 para x*/
 		/*rand de 1 a 8 para y*/
@@ -92,28 +93,34 @@ public class sorteios{
 		move(x,y,jog);
 	}
 	public sort_next_coord(int piece[]){
-		int vec[] = new int[9];
+		//int vec[] = new int[9];
+		this();
 		//inicializo o vetor de rand
 		for(int i = 0; i<=8;i++)
 			vec[i] = i;
 		//rand de 1 a 8
 		int n = 8;
-		sort_in_vec(vec,n);
+		sort_in_vec(n);
 		n--;
 		for(int i = 8; i<=0; i--){
 			if(evaluation(p,piece) == 0)
 				return False;
-			sort_in_vec(vec,n);
+			sort_in_vec(n);
 			n--;
 		}
 
 	}
-	public sort_in_vec(int vec[],int n){
+	public sort_in_vec(int n){
+		this();
 		//rand de 1 a n
 		vec[rand]=0;
 		for(int a = 1,int i = 1;a<=8;i++,a++)
-			if(vec[i]==0)//pensar nisso aqui!!!
+			if(vec[i]==0){//pensar nisso aqui!!!
+				for(int j = i; j<=7&&vec[j]==0;j++)
+					a = j;
 				vec[i]=vec[a+1];
+				vec[a+1]=0;
+			}
 	}
 	faço o sort entre 8
 		boto 0 no num escolhido
@@ -124,3 +131,7 @@ public class sorteios{
 aprender o print
 aprender passar vec por referencia
 aprendder a dar "include"
+
+public static void main(String[] args) {
+	//bla
+}
