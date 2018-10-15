@@ -1,8 +1,8 @@
-package xadrez;
+package xadrez_tp;
 
 import java.util.Random;
 
-public class Sortings {
+public class Sortings extends Table{
 	private int vec[] = new int[9];
 	public void sort_first_coord(Table aux){
 		Random gen = new Random();
@@ -12,8 +12,29 @@ public class Sortings {
 		/*rand de 1 a 8 para y*/
 		int y = gen1.nextInt(8) + 1;
 		aux.move(x,y);
+		aux.horse_mem[1] = x;
+		aux.horse_mem[2] = y;
 	}
-	public boolean sort_next_coord(Table aux,int piece[]){
+	public static void next_pos(int[] piece){
+		int end_flag;
+		for(int i = 1; i<=8;i++){
+			//movo para a prox posicao
+			if(Table.evaluation(i,piece){
+				//next_pos(piece);
+				move_back();
+			}
+			else
+				end_flag++;
+		}
+		//ativo a func de completude
+		if(end_flag == 8)
+			end_game();
+	}
+}
+
+	
+/*
+public boolean sort_next_coord(Table aux,int piece[]){
 		for(int i = 0; i<=8;i++)
 			vec[i] = i;
 		//rand de 1 a 8
@@ -42,4 +63,4 @@ public class Sortings {
 			}
 		return rand;
 	}
-}
+*/
