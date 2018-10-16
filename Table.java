@@ -1,22 +1,29 @@
 package xadrez_tp;
 
-import java.util.Arrays;
-
 public class Table{
-	private static int T[][];
-	private static int M[][];
+	private int T[][];
+	private int M[][];
 	public int jog;
-	public static int num_casas;
-	public static int MaxNum;
-	public static int horse[];
-	public static int horse_mem[];
-	public void imprime(float elapsedT){
-		Arrays.stream(M).forEach((row) -> {
-            //System.out.print("[");
-            Arrays.stream(row).forEach((el) -> System.out.print(" | " + el + "  "));
-            System.out.println("|");
-		});
-	    System.out.println("Numero de casas percorridas: "+ MaxNum + "\nTempo total de simulacao: "+ elapsedT +" segundos");
+	public int num_casas;
+	public int MaxNum;
+	public  int horse[];
+	public int horse_mem[];
+	public void imprime(/*float elapsedT*/){
+		for(int i = 1;i<=8;i++) {
+			for(int j=1;j<=8;j++) {
+				//System.out.print("\t");
+				if(M[i][j]<=9) {
+					System.out.print("\t");
+					System.out.print(M[i][j] + "  |");
+				}
+				else {
+					System.out.print("\t");
+					System.out.print(M[i][j] + " |");
+				}
+			}
+			System.out.print("\n");
+		}
+	    System.out.println("Numero de casas percorridas: "+ MaxNum /*+ "\nTempo total de simulacao: "+ elapsedT +" segundos"*/);
 	}
 
 	public void start_play(){
@@ -26,7 +33,7 @@ public class Table{
 		horse = new int[3];
 		horse_mem = new int[3];
 	}
-	public static void move(int x, int y){
+	public void move(int x, int y){
 		//super();
 		T[x][y] = num_casas + 1;
 		for(int i = 1; i<=2; i++)
@@ -34,33 +41,35 @@ public class Table{
 		horse[1] = x;
 		horse[2] = y;
 		update();
+		System.out.println("update: " + horse[1] + " " + horse[2] + " " + horse_mem[1] + " " + horse_mem[2] + " " + num_casas + " \n");
 	}
-	public static void move_back(/*int x, int y*/){
+	public void move_back(/*int x, int y*/){
 		T[horse[1]][horse[2]] = 0;
 		for(int i = 1; i<=2; i++)
 			horse[i] = horse_mem[i];
 		restore();
+		System.out.println("restore: " + horse[1] + " " + horse[2] + " " + horse_mem[1] + " " + horse_mem[2] + " " + num_casas + " \n");
 	}
-	private static void update(){
+	private void update(){
 		num_casas += 1;
 	}
-	private static void restore(){
+	private void restore(){
 		num_casas -= 1;
 	}
-	public static boolean check_pos(int x,int y){
+	public boolean check_pos(int x,int y){
 		if(x<=8 && y<=8 && x >= 1 && y >= 1)
     		if(T[x][y]==0)
     			return true;
 		return false;
 	}
-	public static boolean evaluation(int p, int[] piece){
+	public boolean evaluation(Sortings sort, int p, int[] piece){
 		switch (p){
 			case 1:
 				if(check_pos(piece[1]+2,piece[2]+1)){
 					move(piece[1]+2,piece[2]+1);
 					//piece[1] += 2;
 					//piece[2] += 1;
-					Sortings.next_pos(horse);
+					sort.next_pos(this,horse);
 				}
 				else
 					return false;
@@ -70,7 +79,7 @@ public class Table{
 					move(piece[1]+2,piece[2]-1);
 					//piece[1] += 2;
 					//piece[2] -= 1;
-					Sortings.next_pos(horse);
+					sort.next_pos(this,horse);
 				}
 				else
 					return false;
@@ -80,7 +89,7 @@ public class Table{
 					move(piece[1]-2,piece[2]+1);
 					//piece[1] -= 2;
 					//piece[2] += 1;
-					Sortings.next_pos(horse);
+					sort.next_pos(this,horse);
 				}
 				else
 					return false;
@@ -90,7 +99,7 @@ public class Table{
 					move(piece[1]-2,piece[2]-1);
 					//piece[1] -= 2;
 					//piece[2] -= 1;
-					Sortings.next_pos(horse);
+					sort.next_pos(this,horse);
 				}
 				else
 					return false;
@@ -100,7 +109,7 @@ public class Table{
 					move(piece[1]+1,piece[2]+2);
 					//piece[1] += 1;
 					//piece[2] += 2;
-					Sortings.next_pos(horse);
+					sort.next_pos(this,horse);
 				}
 				else
 					return false;
@@ -110,7 +119,7 @@ public class Table{
 					move(piece[1]-1,piece[2]+2);
 					//piece[1] -= 1;
 					//piece[2] += 2;
-					Sortings.next_pos(horse);
+					sort.next_pos(this,horse);
 				}
 				else
 					return false;
@@ -120,7 +129,7 @@ public class Table{
 					move(piece[1]+1,piece[2]-2);
 					//piece[1] += 1;
 					//piece[2] -= 2;
-					Sortings.next_pos(horse);
+					sort.next_pos(this,horse);
 				}
 				else
 					return false;
@@ -130,7 +139,7 @@ public class Table{
 					move(piece[1]-1,piece[2]-2);
 					//piece[1] -= 1;
 					//piece[2] -= 2;
-					Sortings.next_pos(horse);
+					sort.next_pos(this,horse);
 				}
 				else
 					return false;
@@ -140,13 +149,14 @@ public class Table{
 		return true;
 		//faça o retorno do piece para ser usado no move_bck da funcao next_pos
 	}
-	public static void end_game(){
-		if(num_casas > MaxNum){
+	public void end_game(){
+		if(num_casas >= MaxNum){
 			for(int i = 1;i<=8;i++)
 				for(int j = 1; j<=8;j++)
 					M[i][j] = T[i][j];
 			MaxNum = num_casas;
 		}
+		imprime();
 	}
 
 }
