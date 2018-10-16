@@ -20,8 +20,8 @@ public class Sortings /*extends Table*/{
 		for(int i = 1; i<=8;i++){
 			//movo para a prox posicao
 			if(aux.evaluation(this,i,piece)){
-				System.out.println(i + "\n");
-				//next_pos(piece);
+				//System.out.println(i + "\n");
+				//next_pos(aux,piece);
 				aux.move_back();
 			}
 			else

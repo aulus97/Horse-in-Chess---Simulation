@@ -67,8 +67,8 @@ public class Table{
 			case 1:
 				if(check_pos(piece[1]+2,piece[2]+1)){
 					move(piece[1]+2,piece[2]+1);
-					//piece[1] += 2;
-					//piece[2] += 1;
+					piece[1] += 2;
+					piece[2] += 1;
 					sort.next_pos(this,horse);
 				}
 				else
@@ -77,8 +77,8 @@ public class Table{
 			case 2:
 				if(check_pos(piece[1]+2,piece[2]-1)){
 					move(piece[1]+2,piece[2]-1);
-					//piece[1] += 2;
-					//piece[2] -= 1;
+					piece[1] += 2;
+					piece[2] -= 1;
 					sort.next_pos(this,horse);
 				}
 				else
@@ -87,8 +87,8 @@ public class Table{
 			case 3:
 				if(check_pos(piece[1]-2,piece[2]+1)){
 					move(piece[1]-2,piece[2]+1);
-					//piece[1] -= 2;
-					//piece[2] += 1;
+					piece[1] -= 2;
+					piece[2] += 1;
 					sort.next_pos(this,horse);
 				}
 				else
@@ -97,8 +97,8 @@ public class Table{
 			case 4:
 				if(check_pos(piece[1]-2,piece[2]-1)){
 					move(piece[1]-2,piece[2]-1);
-					//piece[1] -= 2;
-					//piece[2] -= 1;
+					piece[1] -= 2;
+					piece[2] -= 1;
 					sort.next_pos(this,horse);
 				}
 				else
@@ -107,8 +107,8 @@ public class Table{
 			case 5:
 				if(check_pos(piece[1]+1,piece[2]+2)){
 					move(piece[1]+1,piece[2]+2);
-					//piece[1] += 1;
-					//piece[2] += 2;
+					piece[1] += 1;
+					piece[2] += 2;
 					sort.next_pos(this,horse);
 				}
 				else
@@ -117,8 +117,8 @@ public class Table{
 			case 6:
 				if(check_pos(piece[1]-1,piece[2]+2)){
 					move(piece[1]-1,piece[2]+2);
-					//piece[1] -= 1;
-					//piece[2] += 2;
+					piece[1] -= 1;
+					piece[2] += 2;
 					sort.next_pos(this,horse);
 				}
 				else
@@ -127,8 +127,8 @@ public class Table{
 			case 7:
 				if(check_pos(piece[1]+1,piece[2]-2)){
 					move(piece[1]+1,piece[2]-2);
-					//piece[1] += 1;
-					//piece[2] -= 2;
+					piece[1] += 1;
+					piece[2] -= 2;
 					sort.next_pos(this,horse);
 				}
 				else
@@ -137,8 +137,8 @@ public class Table{
 			case 8:
 				if(check_pos(piece[1]-1,piece[2]-2)){
 					move(piece[1]-1,piece[2]-2);
-					//piece[1] -= 1;
-					//piece[2] -= 2;
+					piece[1] -= 1;
+					piece[2] -= 2;
 					sort.next_pos(this,horse);
 				}
 				else
